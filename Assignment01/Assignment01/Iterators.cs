@@ -4,6 +4,7 @@ public static class Iterators
 {
     public static IEnumerable<T> Flatten<T>(IEnumerable<IEnumerable<T>> items) 
     {
+        
         foreach (var list in items)
         {
             foreach (var item in list)
