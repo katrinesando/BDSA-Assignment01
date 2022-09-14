@@ -52,18 +52,54 @@ public class RegExprTests
         var expected = new[]{(1024,768),(800,600),(640,480)};
         result.Should().BeEquivalentTo(expected);
     }
-    [Fact]
-    public void Html_inner_teskst(){
+  [Fact]
+    public void Html_inner_text(){
         //Given
-        var html = "<div>Regex Text <a> This is Inner text</a> <p>This is not</p><a>More text</a></div>";
+        var html = "<div>Regex Text <a>This is Inner text</a> <p>This is not</p><a>More text</a></div>";
 
         //When
         var result = RegExpr.InnerText(html,"a");
 
         //Then
-        var expected = new[]{" This is Inner text","More text"};
+        var expected = new[]{"This is Inner text","More text"};
         result.Should().BeEquivalentTo(expected);
+    }
+    [Fact]
+    public void Html_inner_with_URL_text(){
+        //Given
+        var html = "<div>Regex Text <a href='https://en.wikipedia.org/wiki/Theoretical_computer_science' title='Theoretical computer science'>This is Inner text</a> <p>This is not</p><a>More text</a></div>";
 
+        //When
+        var result = RegExpr.InnerText(html,"a");
+
+        //Then
+        var expected = new[]{"This is Inner text","More text"};
+        result.Should().BeEquivalentTo(expected);
+    }
+
+    [Fact]
+    public void Html_with_URL_text(){
+        //Given
+        var html = "<div><p>A <b>regular expression</b>, (sometimes called a <b>rational expression</b>) is, in <a href=\"https://en.wikipedia.org/wiki/Theoretical_computer_science\" title=\"Theoretical computer science\">theoretical computer science</a>and <a href=\"https://en.wikipedia.org/wiki/Formal_language\" title=\"Formal language\">formal language</a> </p></div>";
+
+        //When
+        var result = RegExpr.Urls(html);
+
+        //Then
+        var expected = new[]{(new Uri("https://en.wikipedia.org/wiki/Theoretical_computer_science"),"Theoretical computer science"),(new Uri("https://en.wikipedia.org/wiki/Formal_language"),"Formal language")};
+        result.Should().BeEquivalentTo(expected);
+    }
+
+      [Fact]
+    public void URL_without_title_text(){
+        //Given
+        var html = "<a href=\"https://github.com\">No title </a>";
+        //When
+        var result = RegExpr.Urls(html);
+
+        //Then
+        var expected = new[]{(new Uri("https://github.com"),"No titel")};
+        result.Should().BeEquivalentTo(expected);
     }
    
 }
