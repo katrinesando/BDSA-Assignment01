@@ -24,7 +24,7 @@ public class RegExprTests
         var result = RegExpr.Resolution(screenRes);
         
         //then
-        var expected =new[]{1920,1080}; 
+        var expected =new[]{(1920,1080)}; 
         result.Should().BeEquivalentTo(expected);
 
     }
@@ -52,4 +52,18 @@ public class RegExprTests
         var expected = new[]{(1024,768),(800,600),(640,480)};
         result.Should().BeEquivalentTo(expected);
     }
+    [Fact]
+    public void Html_inner_teskst(){
+        //Given
+        var html = "<div>Regex Text <a> This is Inner text</a> <p>This is not</p><a>More text</a></div>";
+
+        //When
+        var result = RegExpr.InnerText(html,"a");
+
+        //Then
+        var expected = new[]{"This is Inner text","More text"};
+        result.Should().BeEquivalentTo(expected);
+
+    }
+   
 }
