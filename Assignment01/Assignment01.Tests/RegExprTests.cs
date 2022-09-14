@@ -1,4 +1,4 @@
-namespace Assignment1.Tests;
+namespace Assignment01.Tests;
 
 public class RegExprTests
 {
@@ -9,7 +9,7 @@ public class RegExprTests
         var test = new[]{"This is","a String","of 4 words","yay"};
 
         //When
-        var result = RegExpr.Splitline(test);
+        var result = RegExpr.SplitLine(test);
 
         //Then
         result.Should().BeEquivalentTo(new[]{"This","is","a", "String", "of","4", "words","yay"});
