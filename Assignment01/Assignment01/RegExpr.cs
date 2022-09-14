@@ -28,5 +28,9 @@ public static class RegExpr
         }
     }
 
-    public static IEnumerable<string> InnerText(string html, string tag) => throw new NotImplementedException();
+    public static IEnumerable<string> InnerText(string html, string tag) {
+        var pattern = $@"(?<opening><{tag}.*>)(?<inner>(\w+|[0-9]| +)+)(?<closing></{tag}>)";
+        var reg = new Regex(pattern);
+
+    }
 }
