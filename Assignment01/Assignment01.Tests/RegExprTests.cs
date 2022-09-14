@@ -93,7 +93,7 @@ public class RegExprTests
       [Fact]
     public void URL_without_title_text(){
         //Given
-        var html = "<a href=\"https://github.com\">No title </a>";
+        var html = "<a href=\"https://github.com\">No title</a>";
         //When
         var result = RegExpr.Urls(html);
 
