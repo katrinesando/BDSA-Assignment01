@@ -61,7 +61,7 @@ public class RegExprTests
         var result = RegExpr.InnerText(html,"a");
 
         //Then
-        var expected = new[]{"This is Inner text","More text"};
+        var expected = new[]{" This is Inner text","More text"};
         result.Should().BeEquivalentTo(expected);
 
     }

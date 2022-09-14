@@ -29,8 +29,12 @@ public static class RegExpr
     }
 
     public static IEnumerable<string> InnerText(string html, string tag) {
-        var pattern = $@"(?<opening><{tag}.*>)(?<inner>(\w+|[0-9]| +)+)(?<closing></{tag}>)";
+        var pattern = $@"(?<opening><{tag}(.*?)>)(?<inner>(\w+|[0-9]| +)+)(?<closing></{tag}>)";
         var reg = new Regex(pattern);
 
+        foreach (Match m in reg.Matches(html))
+        {
+            yield return m.Groups["inner"].Value;
+        }
     }
 }
