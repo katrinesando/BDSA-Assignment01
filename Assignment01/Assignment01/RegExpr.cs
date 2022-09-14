@@ -37,4 +37,19 @@ public static class RegExpr
             yield return m.Groups["inner"].Value;
         }
     }
+
+    IEnumerable<(Uri url, string title)> Urls(string html){
+        var pattern = @"(?<beginURL>href="")(?<url>[^"" ][^""]*)"" (title=""(?<title>[^"" ][^""]*)""?)";
+        var reg = new Regex(pattern);
+        foreach (Match m in reg.Matches(html))
+        {
+            if(m.Groups["title"] != null){
+                yield return (new Uri(m.Groups["url"].Value),m.Groups["title"].Value);
+            }else{
+                yield return (new Uri(m.Groups["url"].Value),"");
+            }
+            
+        }
+
+    }
 }
