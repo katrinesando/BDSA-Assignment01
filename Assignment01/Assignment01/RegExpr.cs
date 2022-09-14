@@ -39,11 +39,11 @@ public static class RegExpr
     }
 
     public static IEnumerable<(Uri url, string title)> Urls(string html){
-        var pattern = @"(?<beginURL>href="")(?<url>[^"" ][^""]*)"" (title=""(?<title>[^"" ][^""]*)""?)(.*?>(?<innertext>(\w|[0-9]|\s)*)?)";
+        var pattern = @"(?<beginURL>href="")(?<url>[^"" ][^""]*)""(\s|>)(title=""(?<title>[^"" ][^""]*)"")?(.*?(?<innertext>(\w|[0-9]|\s)*))?";
         var reg = new Regex(pattern);
         foreach (Match m in reg.Matches(html))
         {
-            
+
             if(m.Groups["title"].Value != ""){
                 yield return (new Uri(m.Groups["url"].Value),m.Groups["title"].Value);
             }else{

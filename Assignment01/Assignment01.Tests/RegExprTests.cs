@@ -98,7 +98,7 @@ public class RegExprTests
         var result = RegExpr.Urls(html);
 
         //Then
-        var expected = new[]{(new Uri("https://github.com"),"No titel")};
+        var expected = new[]{(new Uri("https://github.com"),"No title")};
         result.Should().BeEquivalentTo(expected);
     }
    
