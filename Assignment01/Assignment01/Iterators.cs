@@ -18,7 +18,7 @@ public static class Iterators
     {
         foreach (var item in items)
         {
-            if (predicate)
+            if (predicate(item))
             {
                 yield return item;
             }
