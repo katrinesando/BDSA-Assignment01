@@ -38,7 +38,7 @@ public static class RegExpr
         }
     }
 
-    IEnumerable<(Uri url, string title)> Urls(string html){
+    public static IEnumerable<(Uri url, string title)> Urls(string html){
         var pattern = @"(?<beginURL>href="")(?<url>[^"" ][^""]*)"" (title=""(?<title>[^"" ][^""]*)""?)";
         var reg = new Regex(pattern);
         foreach (Match m in reg.Matches(html))
