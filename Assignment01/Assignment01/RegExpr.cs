@@ -10,7 +10,7 @@ public static class RegExpr
             
             foreach (Match match in regExpr.Matches(line))
             {
-                yield return match.Groups[1].Value;
+                yield return match.Groups[0].Value;
             }
         }
     }
